@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,9 +37,9 @@
       rules:
       {
         email: {
-              required: "required",
-              email: "true",
-            },
+        required: true,
+        email: true
+      },
      
        password: "required"
 
@@ -48,11 +49,8 @@
 
       messages: {
       
-      email: {
-              required: "Please Write Email Address",
-              email: "Please Write Correct Email Address"
-            },
-      password: "Please Write Password"
+      email: "Please enter a valid email address",
+      password: "Please enter password."
       },
       submitHandler: function(form) {
             form.submit();

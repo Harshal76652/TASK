@@ -1,7 +1,4 @@
-   
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
+   <?php    print_r($this->session->userdata('name')); ?>
     <title>Bootstrap Example</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,9 +15,10 @@
                     <div class="panel panel-default">
   					            	<div class="panel-heading panel-heading-divider">
   					                <div class="panel-options">
-                				     <a href="javascript:;" onclick="jQuery('#modal-1').modal('show');" class="btn btn-primary pull-right"><strong>Add User</strong></a>	
-                						   <span class="icon mdi mdi-download"></span>
-                						</a>
+                  				       <a href="javascript:;" onclick="jQuery('#modal-1').modal('show');" class="btn btn-primary pull-right"><strong>Add User</strong>
+                                </a>
+                                <a href="logout" class="btn btn-primary"><strong>Logout</strong>
+                                </a>
             					    	</div>
             						</div>
               						<div class="panel-body">
@@ -61,7 +59,8 @@
                                       
                                                 <a  id="<?= $viewEmployee->id ?>"  onclick="showEdit('<?= $viewEmployee->id ?>' )"  class="btn btn-primary">Edit</a>
                                                 <?php $id = $viewEmployee->id ;?>
-                                                <a  href="<?php echo site_url("User/deleteEmployee/$id")?>"  class="btn btn-danger delete">Delate</a> 
+                                                <a  href="<?php echo site_url("User/deleteEmployee/$id")?>"  class="btn btn-danger delete">Delate</a>
+                                                
                                          
 
                                               </td>
@@ -273,7 +272,9 @@
 $(document).ready(function(){
    
     $('#showEdit').submit(showEdit);
+    
 });
+
 function showEdit(id)
 
   {
@@ -293,6 +294,7 @@ function showEdit(id)
     
   });
   }
+  
  </script>
  <script type="text/javascript">
     
@@ -302,7 +304,7 @@ function showEdit(id)
 
       rules:
       {
-        first_name: "required",
+       first_name: "required",
        last_name: "required",
        username: "required",
        email: "required",

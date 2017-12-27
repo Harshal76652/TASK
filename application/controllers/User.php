@@ -9,19 +9,29 @@ class User extends CI_Controller {
     parent::__construct();
    $this->load->model('UserNew_Model');
 
+
   }
 	public function index()
 	{
-		             
-		            $this->load->view("login");
+		            
+                        $this->load->view("login");
+               
+		         
 	}
   public function logincheck()
-  {              $email = $this->input->post('email');
-                $password = $this->input->post('password');
-                $post   =  array('email' => $email,'password' => $password);
 
+  {              $email = $this->input->post('email');
+                 $password = $this->input->post('password');
+               
+                 $post   =  array('email' => $email,'password' => $password);
+
+                $this->session->set_userdata('name',$post);
+              
                 $this->response  = $this->UserNew_Model->login_valid($post);
-                if($this->response ==TRUE){
+               
+               print_r( $this->response);
+               
+                if($this->response){
                   redirect('User/viewUser');
                 }
                 else{
@@ -30,12 +40,19 @@ class User extends CI_Controller {
                 $this->load->view("login");
                 }
   }
+  public function logout(){
+   
+   $this->session->unset_userdata('name'); 
+   $this->load->view("login");
+}
 	public function viewUser()
 	{           
-	                
+	   if($this->session->userdata('name') == null ){  
+          redirect("User");
+     }else{
 		             $viewEmployee =$this->UserNew_Model->viewAllEmployee();
                   $this->load->view('viewDetails',['viewEmployee' =>$viewEmployee]);
-                    
+           }       
 	}
 	public function addEmployee()
 	{                 
@@ -74,8 +91,7 @@ class User extends CI_Controller {
  
 
 public function deleteEmployee($id){
-    
-   
+
              $this->load->model('UserNew_Model');
             if($this->UserNew_Model->deleteEmployee($id)){
                 
@@ -93,7 +109,8 @@ public function editUser()
   {                 
        $data ['id'] = $_POST['id'];
                       $data['edit'] = $this->UserNew_Model->edit_employee( $data ['id']);
-                      echo json_encode((array)$data);
+                      echo json_encode((array)$data);exit;
+                 
                     
   }
 

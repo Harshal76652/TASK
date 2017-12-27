@@ -7,22 +7,24 @@ class UserNew_Model extends CI_Model {
     public function __construct() {
 		
 		parent::__construct();		
-		$this->table_name = 'user_deatils';
+		$this->table_name = 'user_deatils'; 
+
 	}
 	public function login_valid($post){
-           
-        
+
         $this->db->where('email',$post['email']);
         $this->db->where('password',$post['password']);
-        $q = $this->db->get(user_deatils);
-        $result->User=false;
-        $result->User = $q->row();
-              if ($q->num_rows() > 0) {
-        return $result;
-      } else {
-         return $result;
-      }
+        $query = $this->db->get($this->table_name);
+  
+        if ($query->num_rows() == 1)  
+        {  
+            return true;  
+        } else {  
+            return false;  
+        } 
 }
+    
+
 	public function viewAllEmployee(){
     
                 $query = $this->db->select('*')
